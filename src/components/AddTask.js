@@ -26,7 +26,13 @@ export default class AddTask extends React.Component{
         let addTaskButton = document.getElementById('addTaskButton');
         addTaskButton.style = "display: block;";
         addPanel.style = "display: none;";
-        
+        let pomodoroTasks = [];
+        for(let i=0; i<Number.parseInt(this.state.currentValue); i++){
+            let task = {title: this.state.task, isCompleted: false};
+            pomodoroTasks.push(task);
+        }
+        this.setState({currentValue: "1", task: ""});
+        this.props.addPomodoros(pomodoroTasks);
     }
     handleChange= (e)=>{
         if(Number.parseInt(e.target.value)<=0) this.setState({currentValue: "1"});
@@ -40,7 +46,7 @@ export default class AddTask extends React.Component{
     render(){
     return (
         <div className="w3-cell-row w3-mobile">
-            <button id="addTaskButton" className="w3-button w3-block w3-center-align" type="button" onClick={(e)=>this.toggleAddPanel(e)}>Add</button>
+            <button id="addTaskButton" className="w3-button w3-green w3-block w3-center-align" type="button" onClick={(e)=>this.toggleAddPanel(e)}>Add</button>
             <div id="addPanel" className="w3-container w3-light-gray" style={{display: "none"}}>
                 <div className="w3-row">
                     <input type="text" placeholder="What are you working on?" value={this.state.task} onChange={(e)=>this.handleTaskInput(e)} className="w3-input w3-border w3-rest" />
