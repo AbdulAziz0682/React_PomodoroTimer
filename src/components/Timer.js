@@ -47,7 +47,7 @@ export default class Timer extends React.Component{
     }
     render(){
         return(
-            <div className="w3-container w3-center w3-indigo">
+            <div className="w3-container w3-center w3-deep-purple">
                 <h1 className="w3-header w3-center">
                     {this.state.currentTime.toSecMinString()}
                 </h1>

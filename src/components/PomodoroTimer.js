@@ -9,28 +9,28 @@ export default class PomodoroTimer extends React.Component {
             currentTab: "pomodoro"
         }
     }
-    showTab = (tab) => {
+    showTab = (e,tab) => {
+        e.preventDefault();
         this.setState({currentTab: tab});
-        console.dir(this.state);
     }
     render() {
         return (
-            <div className="w3-container w3-stretch">
+            <div className="w3-container">
                 <div className="w3-cell-row w3-center w3-deep-purple w3-mobile">
                     <div className="w3-bar-item w3-hover-purple w3-cell w3-third" onClick={
-                            () => this.showTab("pomodoro")
+                            (e) => this.showTab(e,"pomodoro")
                         }
                         id="pomodoro">
                         <span>Pomodoro</span>
                     </div>
                     <div className="w3-bar-item w3-hover-purple w3-cell w3-third" onClick={
-                            () => this.showTab("shortBreak")
+                            (e) => this.showTab(e,"shortBreak")
                         }
                         id="shortBreak">
                         <span>Short Break</span>
                     </div>
                     <div className="w3-bar-item w3-hover-purple w3-cell w3-third" onClick={
-                            () => this.showTab("longBreak")
+                            (e) => this.showTab(e,"longBreak")
                         }
                         id="longBreak">
                         <span>Long Break</span>
