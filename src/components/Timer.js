@@ -8,7 +8,6 @@ export default class Timer extends React.Component{
         this.status= "stopped";
         this.intervalId= -1;
         this.state= (()=>{
-            console.log(this);
             return {currentTime: this.props.totalTime.clone()}
         })();//Self calling function inorder to access parent properites, NOTE: only use arrow function in this case
         
@@ -33,16 +32,14 @@ export default class Timer extends React.Component{
     tick = () => {
         this.intervalId = setInterval(()=>{
             this.setState((pstate)=>{
-                pstate.currentTime.decrementSec();
+                pstate.currentTime = new Time(pstate.currentTime.toSeconds()-1);
                 return {currentTime: pstate.currentTime};
             })
             if(this.state.currentTime.toSeconds()<=0){
-                this.setState((prevState)=>{
-                    return (()=>{
-                        console.log(this)
-                        return {currentTime: this.totalTime.clone()};
-                    })();//Self calling function inorder to access parent properites, NOTE: only use arrow function in this case
-                })
+                this.setState((()=>{
+                    this.status = "stopped";
+                    return {currentTime: this.totalTime.clone()};
+                })());//Self calling function inorder to access parent properites, NOTE: only use arrow function in this case
                 clearInterval(this.intervalId);
                 return;
             }
