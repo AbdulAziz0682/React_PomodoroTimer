@@ -4,13 +4,17 @@ import Time from '../Time';
 export default class Timer extends React.Component{
     constructor(props){
         super(props);
+        this.id = this.props.id;
         this.totalTime= this.props.totalTime;
         this.status= "stopped";
         this.intervalId= -1;
-        this.state= (()=>{
+/*         this.state= (()=>{
             return {currentTime: this.props.totalTime.clone()}
         })();//Self calling function inorder to access parent properites, NOTE: only use arrow function in this case
-        
+         */
+        this.state = {
+            currentTime: this.props.totalTime.clone(),
+        }
     }
     getStatus = function(){
         console.log('getstatus');
@@ -41,9 +45,13 @@ export default class Timer extends React.Component{
                     return {currentTime: this.totalTime.clone()};
                 })());//Self calling function inorder to access parent properites, NOTE: only use arrow function in this case
                 clearInterval(this.intervalId);
+                this.onTimeEnd();
                 return;
             }
         }, 1000);
+    }
+    onTimeEnd = () =>{
+        this.props.onTimeEnd(this);
     }
     render(){
         return(

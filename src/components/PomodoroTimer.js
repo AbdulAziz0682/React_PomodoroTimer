@@ -11,6 +11,7 @@ export default class PomodoroTimer extends React.Component {
     }
     showTab = (e,tab) => {
         e.preventDefault();
+        this.props.setStatus(tab);
         this.setState({currentTab: tab});
     }
     render() {
@@ -37,13 +38,13 @@ export default class PomodoroTimer extends React.Component {
                     </div>
                 </div>
                 {
-                    this.state.currentTab === "pomodoro" && <Timer totalTime={new Time(20, 0)}/>
+                    this.state.currentTab === "pomodoro" && <Timer id="pomodoro" onTimeEnd={this.props.onTimeEnd} totalTime={new Time(20, 0)}/>
                 }
                 {
-                    this.state.currentTab === "shortBreak" && <Timer totalTime={new Time(0, 5)}/>
+                    this.state.currentTab === "shortBreak" && <Timer id="shortBreak" onTimeEnd={this.props.onTimeEnd} totalTime={new Time(0, 5)}/>
                 }
                 {
-                    this.state.currentTab === "longBreak" && <Timer totalTime={new Time(25, 0)}/>
+                    this.state.currentTab === "longBreak" && <Timer id="longBreak" onTimeEnd={this.props.onTimeEnd} totalTime={new Time(25, 0)}/>
                 } 
             </div>
         )

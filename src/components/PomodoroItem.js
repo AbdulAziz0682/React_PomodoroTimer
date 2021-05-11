@@ -2,10 +2,15 @@ import React from 'react';
 
 export default class PomodoroItem extends React.Component{
     constructor(props){
-        super(props);
+        super(props);/* 
         console.log("data to pomodoroItem");
-        console.dir(this.props.data);
-        this.state = this.props.data;
+        console.dir(this.props.data); */
+        //this.state = this.props.data;
+        this.state = {
+            title: this.props.data.title,
+            id: this.props.data.id,
+            isCompleted: this.props.data.isCompleted
+        }
     }
     render(){
         return (
