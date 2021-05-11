@@ -8,11 +8,30 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      status: "",
+      status: "pomodoro",
+      currentTaskTitle: "Create a Java Program",
       pomodoros: [
-        {id: 1, title: "Create a Java Program", isCompleted: false}
+        {id: 1, title: "Create a Java Program", isCompleted: false, current: true}
       ]
     }
+  }
+  makeCurrent = (id) =>{
+    let currentTask = "";
+    let newPomodoros = this.state.pomodoros.map((element)=>{
+      if(element.id==id){
+        element.current = true;
+        currentTask = element.title;
+        return element;
+      }
+      else{
+        element.current = false;
+        return element;
+      }
+    })
+    this.setState({pomodoros: newPomodoros, currentTaskTitle: currentTask});
+  }
+  componentDidUpdate(){
+    console.log('Component updated....');
   }
   setStatus = (status)=>{
     if(status==="pomodoro"){
@@ -38,7 +57,6 @@ export default class App extends React.Component {
     }
   }
   addPomodoros = (pomodoros)=>{
-    console.dir(this.state);
     let newId = this.state.pomodoros[this.state.pomodoros.length-1].id+1;
     let newPomodoros = pomodoros.map((element)=>{
       return {id: newId++, ...element};
@@ -67,7 +85,7 @@ export default class App extends React.Component {
       <div className="w3-container w3-indigo w3-stretch">
         <Navbar />
         <PomodoroTimer setStatus={this.setStatus} onTimeEnd={this.onTimeEnd}/>
-        <TaskContainer pomodoros={this.state.pomodoros} addPomodoros={this.addPomodoros} toggleCompleted={this.toggleCompleted}/>
+        <TaskContainer currentTaskTitle={this.state.currentTaskTitle} pomodoros={this.state.pomodoros} addPomodoros={this.addPomodoros} toggleCompleted={this.toggleCompleted} makeCurrent={this.makeCurrent}/>
       </div>
     );
   }
