@@ -30,9 +30,6 @@ export default class App extends React.Component {
     })
     this.setState({pomodoros: newPomodoros, currentTaskTitle: currentTask});
   }
-  componentDidUpdate(){
-    console.log('Component updated....');
-  }
   setStatus = (status)=>{
     if(status==="pomodoro"){
       document.body.style = "background-color: lightgreen;";
@@ -66,7 +63,6 @@ export default class App extends React.Component {
     });
   }
   toggleCompleted = (id) =>{
-    console.log(id);
     let filteredPomodoro = this.state.pomodoros.map((element)=>{
       if(element.id===id){
         element.isCompleted = !element.isCompleted;
@@ -82,9 +78,9 @@ export default class App extends React.Component {
     {this.state.status === "shortBreak"?document.body.style="background-color: lightblue":""}
     {this.state.status === "longBreak"?document.body.style="background-color: cyan":""}
     return (
-      <div className="w3-container w3-indigo w3-stretch">
+      <div className="w3-container w3-indigo w3-stretch" style={{marginTop: "5%"}}>
         <Navbar />
-        <PomodoroTimer setStatus={this.setStatus} onTimeEnd={this.onTimeEnd}/>
+        <PomodoroTimer status={this.state.status} setStatus={this.setStatus} onTimeEnd={this.onTimeEnd}/>
         <TaskContainer currentTaskTitle={this.state.currentTaskTitle} pomodoros={this.state.pomodoros} addPomodoros={this.addPomodoros} toggleCompleted={this.toggleCompleted} makeCurrent={this.makeCurrent}/>
       </div>
     );

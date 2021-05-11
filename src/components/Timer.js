@@ -8,16 +8,9 @@ export default class Timer extends React.Component{
         this.totalTime= this.props.totalTime;
         this.status= "stopped";
         this.intervalId= -1;
-/*         this.state= (()=>{
-            return {currentTime: this.props.totalTime.clone()}
-        })();//Self calling function inorder to access parent properites, NOTE: only use arrow function in this case
-         */
         this.state = {
             currentTime: this.props.totalTime.clone(),
         }
-    }
-    getStatus = function(){
-        console.log('getstatus');
     }
     toggleStart = (e) =>{
         e.preventDefault();

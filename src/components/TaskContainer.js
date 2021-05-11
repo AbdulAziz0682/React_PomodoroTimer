@@ -6,10 +6,6 @@ export default class TaskContainer extends React.Component{
     constructor(props){
         super(props);
     }
-    handleSubmit = (e) =>{
-        e.preventDefault();
-        console.log(e.target);
-    }
     render(){
         return(
             <div id="taskContainer" className="w3-container">
