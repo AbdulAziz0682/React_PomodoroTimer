@@ -9,9 +9,9 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       status: "pomodoro",
-      currentTaskTitle: "Create a Java Program",
+      currentTaskTitle: "",
       pomodoros: [
-        {id: 1, title: "Create a Java Program", isCompleted: false, current: true}
+        //{id: 1, title: "Create a Java Program", isCompleted: false, current: true}
       ]
     }
   }
@@ -54,7 +54,7 @@ export default class App extends React.Component {
     }
   }
   addPomodoros = (pomodoros)=>{
-    let newId = this.state.pomodoros[this.state.pomodoros.length-1].id+1;
+    let newId = this.state.pomodoros.length==0 ? 1 :this.state.pomodoros[this.state.pomodoros.length-1].id+1;
     let newPomodoros = pomodoros.map((element)=>{
       return {id: newId++, ...element};
     });
